@@ -43,16 +43,20 @@ public class App {
         // mengatur text yang tampil di label
         jlHasil.setText("hasil faktorial : ");
         jBtnHitung.addActionListener(e -> {
-        if (Integer.parseInt(jtfInput.getText()) < 100) {
-            String number = jtfInput.getText();
-            int num = Integer.parseInt(number);
-            BigInteger fac = BigInteger.valueOf(num);
-            for (int i = num; i > 1; i--) {
-                fac = fac.multiply (BigInteger.valueOf(i - 1));
+        try {
+                if (Integer.parseInt(jtfInput.getText()) < 100) {
+                    String number = jtfInput.getText();
+                    int num = Integer.parseInt(number);
+                    BigInteger fac = BigInteger.valueOf(num);
+                    for (int i = num; i > 1; i--) {
+                        fac = fac.multiply(BigInteger.valueOf(i - 1));
+                    }
+                    jlHasil.setText("hasil faktorial : " + fac);
+                } else jlHasil.setText("hasil faktorial : hasil terlalu besar untuk ditampilkan");
             }
-            jlHasil.setText("hasil faktorial : " + fac);
+            catch (NumberFormatException exception) {
+                jlHasil.setText("hasil faktorial : format input tidak sesuai");
             }
-        else jlHasil.setText("hasil faktorial : hasil terlalu besar untuk ditampilkan");
         });
         jPanel.add(jlHasil);
 
