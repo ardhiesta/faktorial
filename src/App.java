@@ -41,6 +41,15 @@ public class App {
         jlHasil = new JLabel();
         // mengatur text yang tampil di label
         jlHasil.setText("hasil faktorial : ");
+        jBtnHitung.addActionListener(e -> {
+            String number = jtfInput.getText();
+            int num = Integer.parseInt(number);
+            long fac = num;
+            for (int i = num; i > 1; i--) {
+                fac = fac * (i - 1);
+            }
+            jlHasil.setText("hasil faktorial : " + fac);
+        });
         jPanel.add(jlHasil);
 
         // menambahkan jPanel ke JFrame
