@@ -4,11 +4,22 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.*;
+import java.awt.event.*;
 
 public class App {
     static JTextField jtfInput;
     static JButton jBtnHitung;
     static JLabel jlHasil;
+    
+    // method menghitung faktorial secara rekursif
+    static long faktorial(int n)
+    {
+        if (n == 0){
+            return 1;
+        }
+        
+        return n*faktorial(n-1);
+    }
 
     public static void main(String[] args) throws Exception {
         // membuat frame / window
@@ -42,6 +53,22 @@ public class App {
         // mengatur text yang tampil di label
         jlHasil.setText("hasil faktorial : ");
         jPanel.add(jlHasil);
+
+        jBtnHitung.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String number;
+                try {
+                    number = jtfInput.getText();
+                    int num = Integer.parseInt(number);
+                    long hasilFak = faktorial(num);
+                    
+                    jlHasil.setText(Long.toString(hasilFak));
+                } catch (NumberFormatException ex) {
+                    jlHasil.setText("Input tidak sesuai!");
+                }
+                
+			}
+		});
 
         // menambahkan jPanel ke JFrame
         jfFrame.add(jPanel);
