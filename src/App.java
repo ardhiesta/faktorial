@@ -4,13 +4,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.*;
+import java.awt.event.*;
 
+import java.math.BigInteger;
 public class App {
     static JTextField jtfInput;
     static JButton jBtnHitung;
     static JLabel jlHasil;
+    final static Integer limitFaktorial = 1000;
 
-    public static void main(String[] args) throws Exception {
+    public static  void main(String[] args) throws Exception {
         // membuat frame / window
         JFrame jfFrame = new JFrame();
 
@@ -36,6 +39,21 @@ public class App {
         jBtnHitung.setText("Hitung Faktorial");
         // menambahkan objek JButton ke dalam JPanel
         jPanel.add(jBtnHitung);
+        jBtnHitung.addActionListener(new ActionListener(){  
+            public void actionPerformed(ActionEvent e){
+                    int number;
+                    try {
+                        number = Integer.parseInt(jtfInput.getText());  
+                        if(number < limitFaktorial){
+                            jlHasil.setText("hasil faktorial("+(number)+") : "+Factorial.bigint(number).toString()); 
+                        }else{
+                            jlHasil.setText("Angka terlalu besar!");
+                        }
+                      } catch (NumberFormatException ga_angka ) {
+                        jlHasil.setText("Input hanya boleh mengandung angka saja!");
+                      }  
+            }  
+        });
 
         // membuat objek JTextField untuk menampilkan hasil faktorial 
         jlHasil = new JLabel();
@@ -47,4 +65,17 @@ public class App {
         jfFrame.add(jPanel);
         jfFrame.setVisible(true);
     }
+    
 }
+
+class Factorial{
+    public static BigInteger bigint(int num) {
+        BigInteger bi = new BigInteger("1");
+        for (int j = 2; j <= num; j++) {
+            bi = bi.multiply(BigInteger.valueOf(j));
+        }
+
+        return bi;
+    }
+}
+
