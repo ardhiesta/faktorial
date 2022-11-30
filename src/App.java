@@ -3,6 +3,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import java.math.BigInteger;
 import java.awt.*;
 
 public class App {
@@ -42,13 +43,16 @@ public class App {
         // mengatur text yang tampil di label
         jlHasil.setText("hasil faktorial : ");
         jBtnHitung.addActionListener(e -> {
+        if (Integer.parseInt(jtfInput.getText()) < 100) {
             String number = jtfInput.getText();
             int num = Integer.parseInt(number);
-            long fac = num;
+            BigInteger fac = BigInteger.valueOf(num);
             for (int i = num; i > 1; i--) {
-                fac = fac * (i - 1);
+                fac = fac.multiply (BigInteger.valueOf(i - 1));
             }
             jlHasil.setText("hasil faktorial : " + fac);
+            }
+        else jlHasil.setText("hasil faktorial : hasil terlalu besar untuk ditampilkan");
         });
         jPanel.add(jlHasil);
 
