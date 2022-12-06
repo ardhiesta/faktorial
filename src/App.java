@@ -3,6 +3,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import java.math.BigInteger;
 import java.awt.*;
 
 
@@ -10,6 +11,7 @@ public class App {
     static JTextField jtfInput;
     static JButton jBtnHitung;
     static JLabel jlHasil;
+
 
 
     
@@ -44,6 +46,20 @@ public class App {
         jlHasil = new JLabel();
         // mengatur text yang tampil di label
         jlHasil.setText("hasil faktorial : ");
+        jBtnHitung.addActionListener(e ->{
+            try{
+                String tNumber = jtfInput.getText();
+                int number = Integer.parseInt(tNumber);
+                BigInteger factorial = BigInteger.valueOf(number);
+                for(int i = number; i > 1; i--){
+                    factorial = factorial.multiply(BigInteger.valueOf(i-1));
+                }
+                jlHasil.setText("hasil faktorial: "+ factorial);
+            }
+            catch(NumberFormatException exception){
+                jlHasil.setText("hasil faktorial: Format Input Tidak Sesuai");
+            }
+        });
         jPanel.add(jlHasil);
 
         // menambahkan jPanel ke JFrame
