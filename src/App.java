@@ -4,6 +4,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class App {
     static JTextField jtfInput;
@@ -42,6 +44,32 @@ public class App {
         // mengatur text yang tampil di label
         jlHasil.setText("hasil faktorial : ");
         jPanel.add(jlHasil);
+
+        jBtnHitung.addActionListener(new ActionListener() {     
+          void factorial() {
+            int number = Integer.parseInt(jtfInput.getText());
+            try {
+              if(number < 0 ) {
+                jlHasil.setText("Masukan angka positif");
+              } else {
+                int res =1;
+
+                for(int i=number;i>0;i--) {
+                  res*=i;
+                }
+                jlHasil.setText(String.format("%d",res));
+              }
+
+            } catch(NumberFormatException e) {
+              jlHasil.setText("Masukan angka");
+            }
+          }
+
+          @Override
+          public void actionPerformed(ActionEvent e) {
+            factorial();
+          }
+        });
 
         // menambahkan jPanel ke JFrame
         jfFrame.add(jPanel);
